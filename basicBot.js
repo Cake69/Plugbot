@@ -4252,9 +4252,9 @@
         var users = API.getUsers();
         $(users).each(function () {
             if (this.vote == -1) {
-                if (mehUsers.find(this) >= 0) {
+                if (mehUsers.findIndex(this) > -1) {
                     if (mehpolice == true) {
-                        if (user.vote == -1) {
+                        if (this.vote == -1) {
                             var staff = []
                             API.getStaff().each(function () {
                                 staff.push(this.username);
@@ -4273,7 +4273,9 @@
                     API.sendChat('@' + this.username + ' you may not meh in this community');
                 }
             }
-            mehUsers = mehUsers.filter(function (e) { return e != this })
+            if (this.vote != -1) {
+                mehUsers = mehUsers.filter(function (e) { return e != this })
+            }
         });
     };
     loadChat(basicBot.startup);
