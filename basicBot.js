@@ -4248,7 +4248,7 @@
                 rank: 'user',
                 type: 'exact',
                 functionality: function (chat, cmd) {
-                    API.sendChat("Yes");
+                    console.log("Yes");
                 }
             }
         }
@@ -4260,7 +4260,7 @@
         var users = API.getUsers();
         $(users).each(function () {
             if (this.vote == -1) {
-                if (mehUsers.findIndex(this) > -1) {
+                if ($.contains(mehUsers, this) > -1) {
                     if (mehpolice == true) {
                         if (this.vote == -1) {
                             var staff = []
