@@ -4248,7 +4248,7 @@
                 rank: 'user',
                 type: 'exact',
                 functionality: function (chat, cmd) {
-                    console.log("Yes but 2.0");
+                    console.log("Yes but 3.0");
                 }
             }
         }
