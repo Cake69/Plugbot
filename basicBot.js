@@ -4242,6 +4242,14 @@
                         }
                     }
                 }
+            },
+            testCommand: {
+                command: 'test',
+                rank: 'user',
+                type: 'exact',
+                functionality: function (chat, cmd) {
+                    API.sendChat("Yes");
+                }
             }
         }
     };
