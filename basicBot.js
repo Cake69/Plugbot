@@ -244,9 +244,6 @@
     var botMaintainer = 'Benzi';
     var botCreatorIDs = [3851534, 4105209];
 
-    var mehpolice = true;
-    var mehUsers = [];
-
     var basicBot = {
         version: '2.12.3',
         status: false,
@@ -4225,64 +4222,17 @@
                             }));
                     }
                 }
-            },
-            mehPoliceCommand: {
-                command: 'mehpolice',
-                rank: 'bouncer',
-                type: 'exact',
-                functionality: function (chat, cmd) {
-                    if (this.type === 'exact' && chat.message.length !== cmd.length) return void (0);
-                    if (!basicBot.commands.executable(this.rank, chat)) return void (0);
-                    else {
-                        if ((chat.message == "true") || (chat.message == "True")) {
-                            mehpolice = true;
-                        }
-                        else if ((chat.message == "false") || (chat.message == "False")) {
-                            mehpolice = false;
-                        }
-                    }
-                }
-            },
-            testCommand: {
-                command: 'test',
-                rank: 'user',
-                type: 'exact',
-                functionality: function (chat, cmd) {
-                    console.log("Yes but 3.0");
-                }
             }
         }
     };
     setInterval(function () {
         checkMeh();
-    }, 5000);
+    }, 10000);
     function checkMeh() {
         var users = API.getUsers();
         $(users).each(function () {
             if (this.vote == -1) {
-                if ($.contains(mehUsers, this) > -1) {
-                    if (mehpolice == true) {
-                        if (this.vote == -1) {
-                            var staff = []
-                            $(API.getStaff()).each(function () {
-                                staff.push(this.username);
-                            });
-                            var staffString = "";
-                            var message = "MEH POLICE! @" + this.username + " HAVE MEH'ED THE SONG!"
-                            $(staff).each(function () {
-                                staffString += "@" + this + " ";
-                            });
-                            API.sendChat(staffString + message);
-                        }
-                    }
-                }
-                else {
-                    mehUsers.push(this);
-                    API.sendChat('@' + this.username + ' you may not meh in this community');
-                }
-            }
-            if (this.vote != -1) {
-                mehUsers = mehUsers.filter(function (e) { return e != this })
+                API.sendChat("@" + this.username + " you may not meh in this community");
             }
         });
     };
