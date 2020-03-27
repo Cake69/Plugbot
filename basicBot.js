@@ -4248,7 +4248,7 @@
                 rank: 'user',
                 type: 'exact',
                 functionality: function (chat, cmd) {
-                    console.log("Yes");
+                    console.log("Yes but 2.0");
                 }
             }
         }
@@ -4264,7 +4264,7 @@
                     if (mehpolice == true) {
                         if (this.vote == -1) {
                             var staff = []
-                            API.getStaff().each(function () {
+                            $(API.getStaff()).each(function () {
                                 staff.push(this.username);
                             });
                             var staffString = "";
