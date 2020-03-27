@@ -4268,7 +4268,7 @@
                                 staff.push(this.username);
                             });
                             var staffString = "";
-                            var message = "MEH POLICE! @" + user.username + " HAVE MEH'ED THE SONG!"
+                            var message = "MEH POLICE! @" + this.username + " HAVE MEH'ED THE SONG!"
                             $(staff).each(function () {
                                 staffString += "@" + this + " ";
                             });
