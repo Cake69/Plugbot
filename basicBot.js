@@ -245,6 +245,7 @@
     var botCreatorIDs = [3851534, 4105209];
 
     var mehpolice = true;
+    var mehUsers = [];
 
     var basicBot = {
         version: '2.12.3',
@@ -4251,28 +4252,29 @@
         var users = API.getUsers();
         $(users).each(function () {
             if (this.vote == -1) {
-                API.sendChat('@' + this.username + ' you may not meh in this community');
-                if (mehpolice == true) {
-                    setTimeout(function () {
-                        pingStaffMeh(this);
-                    }, 3000);
+                if (mehUsers.find(this) >= 0) {
+                    if (mehpolice == true) {
+                        if (user.vote == -1) {
+                            var staff = []
+                            API.getStaff().each(function () {
+                                staff.push(this.username);
+                            });
+                            var staffString = "";
+                            var message = "MEH POLICE! @" + user.username + " HAVE MEH'ED THE SONG!"
+                            $(staff).each(function () {
+                                staffString += "@" + this + " ";
+                            });
+                            API.sendChat(staffString + message);
+                        }
+                    }
+                }
+                else {
+                    mehUsers.push(this);
+                    API.sendChat('@' + this.username + ' you may not meh in this community');
                 }
             }
+            mehUsers = mehUsers.filter(function (e) { return e != this })
         });
     };
-    function pingStaffMeh(user) {
-        if (user.vote == -1) {
-            var staff = []
-            API.getStaff().each(function () {
-                staff.push(this.username);
-            });
-            var staffString = "";
-            var message = "MEH POLICE! @" + user.username + " HAVE MEH'ED THE SONG!"
-            $(staff).each(function () {
-                staffString += "@" + this + " ";
-            });
-            API.sendChat(staffString + message);
-        }
-    }
     loadChat(basicBot.startup);
 }).call(this);
